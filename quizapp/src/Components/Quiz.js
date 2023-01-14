@@ -4,6 +4,7 @@ import {Questions} from '../Helpers/QuizBank'
 
 function Quiz() {
   const {score, setScore} = useContext(QuizContext)
+  const {gameState, setGameState} = useContext(QuizContext);
   const [currQuestion, setCurrQuestion] = useState(0)
   const [optionChosen, setOptionChosen] = useState("")
 
@@ -12,6 +13,12 @@ function Quiz() {
       setScore(score+1)
     }
     setCurrQuestion(currQuestion+1)
+  }
+  const endQuestion= ()=>{
+    if (Questions[currQuestion].answer == optionChosen){
+      setScore(score+1)
+    }
+    setGameState("endScreen")
   }
   return (
     <div className='Quiz'>
@@ -24,7 +31,7 @@ function Quiz() {
       </div>
 
       {currQuestion==Questions.length-1?(
-        <button>Finish Quiz</button>
+        <button onClick={endQuestion}>Finish Quiz</button>
       ) : (
         <button onClick={nextQuestion}>Next Question</button>
       )
