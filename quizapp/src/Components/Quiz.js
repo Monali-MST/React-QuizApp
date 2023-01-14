@@ -1,17 +1,18 @@
 import React, {useState, useContext} from 'react'
 import {QuizContext} from '../Helpers/Contexts'
 import {Questions} from '../Helpers/QuizBank'
+import "../App.css";
 
 function Quiz() {
-  const {score, setScore} = useContext(QuizContext)
-  const {gameState, setGameState} = useContext(QuizContext);
+  const {score, setScore, setGameState} = useContext(QuizContext)
+
   const [currQuestion, setCurrQuestion] = useState(0)
   const [optionChosen, setOptionChosen] = useState("")
 
   const nextQuestion = ()=>{
     if (Questions[currQuestion].answer == optionChosen){
       setScore(score+1)
-    }
+    }  
     setCurrQuestion(currQuestion+1)
   }
   const endQuestion= ()=>{
